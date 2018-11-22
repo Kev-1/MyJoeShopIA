@@ -6,6 +6,24 @@ public class Client {
 	private int clientProductOrdered;
 	private String clientAddress;
 	private String deliveryCarrier;
+	private String clientStatus;
+	private boolean clientCompleted;
+	
+	public String getClientStatus() {
+		return clientStatus;
+	}
+
+	public void setClientStatus(String clientStatus) {
+		this.clientStatus = clientStatus;
+	}
+
+	public boolean isClientCompleted() {
+		return clientCompleted;
+	}
+
+	public void setClientCompleted(boolean clientCompleted) {
+		this.clientCompleted = clientCompleted;
+	}
 	
 	public String getClientName() {
 		return clientName;
