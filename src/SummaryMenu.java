@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -63,6 +64,8 @@ public class SummaryMenu {
 		pnlNorth.add(title);
 		pnlNorth.setVisible(true);
 		
+		pnlCenter.setLayout(new GridLayout(3, 9));
+		pnlCenter.add(new JLabel());
 		pnlCenter.add(clientButton);
 		pnlCenter.add(inventoryButton);
 		
