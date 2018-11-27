@@ -64,13 +64,11 @@ public class SummaryMenu {
 		pnlNorth.add(title);
 		pnlNorth.setVisible(true);
 		
-		pnlCenter.setLayout(new GridLayout(3, 9));
-		pnlCenter.add(new JLabel());
+		pnlCenter.setLayout(new GridLayout(2, 2));
+		pnlCenter.add(clientName);
 		pnlCenter.add(clientButton);
+		
 		pnlCenter.add(inventoryButton);
 		
-		pnlCenter.add(clientName);
-		pnlCenter.add(clientItem);
-		pnlCenter.add(clientStatus);
 	}
 }
