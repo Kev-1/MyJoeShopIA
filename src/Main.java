@@ -2,7 +2,7 @@
 public class Main {
 	
 	public Main() {
-		new SummaryMenu();
+		new InventoryMenu();
 	}
 
 	public static void main(String[] args) {
