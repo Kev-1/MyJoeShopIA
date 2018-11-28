@@ -1,77 +1,177 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class SummaryMenu {
-	//Initialize main stuff
+
+public class SummaryMenu implements ActionListener {
+
 	
 	private JFrame mainFrame;
-	private JButton clientButton, inventoryButton;
-	private JLabel title, clientName, clientItem, clientStatus;
+	private JLabel lblTitle,lblWelcome;
+	private JPanel pnlTitle,pnlCenter,pnlLeft,pnlRight;
 	
-	//Initialize border layout
-	private JPanel pnlNorth, pnlCenter;
+	private JPanel pnlLeftItemDetail1,pnlLeftButtonDetail1;
+	private JButton btnSetAsComplete1,btnModify1;
 	
-	SummaryMenu() {
-		//initialization
-		mainFrame = new JFrame();
+	private JPanel pnlLeftItemDetail2,pnlLeftButtonDetail2;
+	private JButton btnSetAsComplete2,btnModify2;
+	
+	
+	//STEP OF CREATING OBJECT:
+	//1. Declaration
+	//2. Initialization
+	//3. Instantiation
+	//JFrame mainFrame => STEP 1 = DECLARATION
+	//JFrame mainFrame = new => STEP 2 = INITIALIZATION
+	//JFrame mainFrame = new JFrame()l => STEP 3 = INSTANTIATION
+	
+	private JButton btnClients,btnInventory,btnReload,btnExit;
+	
+	public SummaryMenu() {
 		
-		title = new JLabel();
+		//initialize
+		mainFrame = new JFrame("Main Window");
+		lblTitle = new JLabel("My Joe Shop");
 		
-		clientButton = new JButton();
-		inventoryButton = new JButton();
+		String time = "";
+		Calendar calendar = Calendar.getInstance();
+		time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+		lblWelcome = new JLabel("Welcome back! The current time is " + time);
 		
-		clientName = new JLabel();
-		clientItem = new JLabel();
-		clientStatus = new JLabel();
-
-		pnlNorth = new JPanel();
-		pnlCenter = new JPanel();
+		pnlTitle = new JPanel(new BorderLayout());
+		pnlCenter = new JPanel(new BorderLayout());
+		pnlLeft = new JPanel(new GridLayout(4, 3));
+		pnlLeftItemDetail1 = new JPanel(new GridLayout(4, 1));
+		pnlLeftButtonDetail1 = new JPanel(new GridLayout(2, 1));
+		pnlLeftItemDetail2 = new JPanel(new GridLayout(4, 1));
+		pnlLeftButtonDetail2 = new JPanel(new GridLayout(2, 1));
+		pnlRight = new JPanel(new GridLayout(10	, 2));
 		
-		//set attributes
+		btnSetAsComplete1 = new JButton("Set as complete");
+		btnModify1 = new JButton("Modify client order");
+		
+		btnSetAsComplete2 = new JButton("Set as complete");
+		btnModify2 = new JButton("Modify client order");
+		
+		
+		btnClients = new JButton("Clients");
+		
+		btnInventory = new JButton("Inventory");
+		btnReload = new JButton("Reload");
+		btnExit = new JButton("Exit");
+		
 		mainFrame.setSize(640, 480);
-		mainFrame.setVisible(true);
-		mainFrame.setTitle("MyJoeShop");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
+		mainFrame.setLocationRelativeTo(null);
 		
-		//set title static
-		title.setText("MyJoeShop");
-		title.setVisible(true);
+		JPanel pnlTitleUpper = new JPanel();
+		pnlTitleUpper.add(lblTitle);
+		pnlTitle.add(pnlTitleUpper, "North");
 		
-		clientName.setText("No Clients");
-		clientItem.setText("-");
-		clientStatus.setText("-");
+		JPanel pnlTitleLower = new JPanel();
+		pnlTitleLower.add(lblWelcome);
+		pnlTitle.add(pnlTitleLower, "Center");
 		
-		//set button
-		clientButton.setText("Client");
-		clientButton.addActionListener(null);
+		pnlLeftItemDetail1.add(new JLabel("Name:"));
+		pnlLeftItemDetail1.add(new JLabel("Item Ordered:"));
+		pnlLeftItemDetail1.add(new JLabel("Expected Due:"));
+		pnlLeftItemDetail1.add(new JLabel("Payment Due:"));
 		
-		//set inventory
-		inventoryButton.setText("Inventory");
-		inventoryButton.addActionListener(null);
-		
-		//add panels
-		mainFrame.add(new JPanel(), BorderLayout.EAST);
-		mainFrame.add(new JPanel(), BorderLayout.WEST);
-		mainFrame.add(pnlCenter, BorderLayout.CENTER);
-		mainFrame.add(pnlNorth, BorderLayout.NORTH);
-		mainFrame.add(new JPanel(), BorderLayout.SOUTH);
-		
-		pnlNorth.add(title);
-		pnlNorth.setVisible(true);
-		
-		pnlCenter.setLayout(new GridLayout(2, 2));
-		pnlCenter.add(clientName);
-		pnlCenter.add(clientButton);
-		
-		pnlCenter.add(inventoryButton);
+		pnlLeftButtonDetail1.add(btnSetAsComplete1);
+		pnlLeftButtonDetail1.add(btnModify1);
 		
 		
+		pnlLeftItemDetail2.add(new JLabel("Name:"));
+		pnlLeftItemDetail2.add(new JLabel("Item Ordered:"));
+		pnlLeftItemDetail2.add(new JLabel("Expected Due:"));
+		pnlLeftItemDetail2.add(new JLabel("Payment Due:"));
 		
+		pnlLeftButtonDetail2.add(btnSetAsComplete2);
+		pnlLeftButtonDetail2.add(btnModify2);
+		
+		pnlLeft.add(new JLabel("Current Clients"));
+		pnlLeft.add(new JPanel());
+		pnlLeft.add(new JPanel());
+		pnlLeft.add(pnlLeftItemDetail1);
+		pnlLeft.add(pnlLeftButtonDetail1);
+		pnlLeft.add(new JPanel());
+		
+		pnlLeft.add(new JPanel());
+		pnlLeft.add(new JPanel());
+		pnlLeft.add(new JPanel());
+		pnlLeft.add(pnlLeftItemDetail2);
+		pnlLeft.add(pnlLeftButtonDetail2);
+		pnlLeft.add(new JPanel());
+		
+		
+		JPanel pnlLblActions = new JPanel();
+		pnlLblActions.add(new JLabel("Actions"));
+		pnlRight.add(pnlLblActions);
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(new JPanel());
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(btnClients);
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(new JPanel());
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(btnInventory);
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(new JPanel());
+		pnlRight.add(new JPanel());
+		pnlRight.add(new JPanel());
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(new JPanel());
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(btnReload);
+		pnlRight.add(new JPanel());
+		
+		pnlRight.add(btnExit);
+		pnlRight.add(new JPanel());
+		
+		
+		
+		
+		pnlCenter.add(pnlLeft,"Center");
+		pnlCenter.add(pnlRight,"East");
+		pnlCenter.add(new JPanel(),"West");
+		pnlCenter.add(new JPanel(),"South");
+		
+		
+		mainFrame.add(pnlTitle,"North");
+		mainFrame.add(pnlCenter,"Center");
+		
+		
+		//ADD ACTION LISTENER
+		btnClients.addActionListener(this);
+		btnExit.addActionListener(this);
+		btnInventory.addActionListener(this);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(btnExit)) {
+			System.exit(0);
+		}
+		
+		if(e.getSource().equals(btnInventory)) {
+		new InventoryMenu();
+		mainFrame.dispose();
+	}
+}
 }

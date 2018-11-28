@@ -1,10 +1,13 @@
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class InventoryMenu {
+public class InventoryMenu implements ActionListener {
 	private JFrame mainFrame;
 	
 	private JLabel inventoryTitle;
@@ -22,8 +25,10 @@ public class InventoryMenu {
 	
 	private JPanel pnlLeft, pnlRight, pnlCenter, pnlNorth;
 	private JPanel item1, item2, item3, item4;
+	private JPanel buttons1, buttons2, buttons3, buttons4;
 	
-	InventoryMenu() {
+	public InventoryMenu() {
+		//Initialization
 		mainFrame = new JFrame();
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,67 +66,80 @@ public class InventoryMenu {
 		addButton = new JButton("Add Item");
 		backButton = new JButton("Back to Home");
 		
-		mainFrame.add(pnlNorth, "North");
-		mainFrame.add(pnlCenter, "Center");
-		mainFrame.add(new JPanel(), "West");
-		mainFrame.add(new JPanel(), "East");
-		
-		pnlNorth.add(inventoryTitle);
-		pnlCenter.setLayout(new BorderLayout(1, 2));
-		pnlLeft.setLayout(new BorderLayout(9, 3));
-		
+		//border of item name and remaining
 		item1 = new JPanel();
-		item1.setLayout(new BorderLayout (2, 1));
+		item1.setLayout(new GridLayout (2, 1));
 		item1.add(itemName1);
 		item1.add(itemRemaining1);
 		
 		item2 = new JPanel();
-		item2.setLayout(new BorderLayout (2, 1));
+		item2.setLayout(new GridLayout (2, 1));
 		item2.add(itemName2);
 		item2.add(itemRemaining2);
 		
 		item3 = new JPanel();
-		item3.setLayout(new BorderLayout (2, 1));
+		item3.setLayout(new GridLayout (2, 1));
 		item3.add(itemName3);
 		item3.add(itemRemaining3);
 		
 		item4 = new JPanel();
-		item4.setLayout(new BorderLayout (2, 1));
+		item4.setLayout(new GridLayout (2, 1));
 		item4.add(itemName4);
 		item4.add(itemRemaining4);
 		
-		pnlLeft.add(new JPanel());
+		buttons1 = new JPanel();
+		buttons1.setLayout(new GridLayout(1, 2));
+		buttons1.add(editButton1);
+		buttons1.add(deleteButton1);
+		
+		buttons2 = new JPanel();
+		buttons2.setLayout(new GridLayout(1, 2));
+		buttons2.add(editButton2);
+		buttons2.add(deleteButton2);
+		
+		buttons3 = new JPanel();
+		buttons3.setLayout(new GridLayout(1, 2));
+		buttons3.add(editButton3);
+		buttons3.add(deleteButton3);
+		
+		buttons4 = new JPanel();
+		buttons4.setLayout(new GridLayout(1, 2));
+		buttons4.add(editButton4);
+		buttons4.add(deleteButton4);
+		
+		//add panels
+		mainFrame.add(pnlNorth, "North");
+		mainFrame.add(pnlCenter, "Center");
+		mainFrame.add(new JPanel(), "West");
+		mainFrame.add(new JPanel(), "East");
+		mainFrame.add(new JPanel(), "South");
+		
+		pnlNorth.add(inventoryTitle);
+		pnlCenter.setLayout(new GridLayout (1, 2));
+		pnlLeft.setLayout(new GridLayout (9, 2));
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(item1);
-		pnlLeft.add(editButton1);
-		pnlLeft.add(deleteButton1);
-		pnlLeft.add(new JPanel());
+		pnlLeft.add(buttons1);
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(item2);
-		pnlLeft.add(editButton2);
-		pnlLeft.add(deleteButton2);
-		pnlLeft.add(new JPanel());
+		pnlLeft.add(buttons2);
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(item3);
-		pnlLeft.add(editButton3);
-		pnlLeft.add(deleteButton3);
-		pnlLeft.add(new JPanel());
+		pnlLeft.add(buttons3);
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(item4);
-		pnlLeft.add(editButton4);
-		pnlLeft.add(deleteButton4);
+		pnlLeft.add(buttons4);
 		pnlLeft.add(new JPanel());
 		pnlLeft.add(new JPanel());
-		pnlLeft.add(new JPanel());
-		
 		pnlCenter.add(pnlLeft);
 		
+		
 		pnlRight = new JPanel();
-		pnlRight.setLayout(new BorderLayout(5,3));
+		pnlRight.setLayout(new GridLayout(5,3));
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
@@ -132,14 +150,22 @@ public class InventoryMenu {
 		pnlRight.add(addButton);
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
-		pnlRight.add(new JPanel());
 		pnlRight.add(backButton);
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
-		
 		pnlCenter.add(pnlRight);
+		
+		backButton.addActionListener(this);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getSource().equals(backButton)) {
+			new SummaryMenu();
+			mainFrame.dispose();
+		}
 		
 	}
 }
