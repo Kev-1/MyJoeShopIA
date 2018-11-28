@@ -3,16 +3,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
 public class SummaryMenu implements ActionListener {
-
 	
 	private JFrame mainFrame;
 	private JLabel lblTitle,lblWelcome;
@@ -23,15 +19,6 @@ public class SummaryMenu implements ActionListener {
 	
 	private JPanel pnlLeftItemDetail2,pnlLeftButtonDetail2;
 	private JButton btnSetAsComplete2,btnModify2;
-	
-	
-	//STEP OF CREATING OBJECT:
-	//1. Declaration
-	//2. Initialization
-	//3. Instantiation
-	//JFrame mainFrame => STEP 1 = DECLARATION
-	//JFrame mainFrame = new => STEP 2 = INITIALIZATION
-	//JFrame mainFrame = new JFrame()l => STEP 3 = INSTANTIATION
 	
 	private JButton btnClients,btnInventory,btnReload,btnExit;
 	
@@ -60,7 +47,6 @@ public class SummaryMenu implements ActionListener {
 		
 		btnSetAsComplete2 = new JButton("Set as complete");
 		btnModify2 = new JButton("Modify client order");
-		
 		
 		btnClients = new JButton("Clients");
 		
@@ -144,18 +130,13 @@ public class SummaryMenu implements ActionListener {
 		pnlRight.add(btnExit);
 		pnlRight.add(new JPanel());
 		
-		
-		
-		
 		pnlCenter.add(pnlLeft,"Center");
 		pnlCenter.add(pnlRight,"East");
 		pnlCenter.add(new JPanel(),"West");
 		pnlCenter.add(new JPanel(),"South");
 		
-		
 		mainFrame.add(pnlTitle,"North");
 		mainFrame.add(pnlCenter,"Center");
-		
 		
 		//ADD ACTION LISTENER
 		btnClients.addActionListener(this);
