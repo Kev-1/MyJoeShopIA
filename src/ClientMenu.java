@@ -1,6 +1,8 @@
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,84 +10,136 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ClientMenu implements ActionListener {
-	private JButton addClient, backButton, btnSetAsCompleted1, btnSetAsCompleted2;
-	private JButton btnModify2, btnModify1;
+	private JButton addClient, backButton, btnSetAsCompleted1, btnSetAsCompleted2, btnModify2, btnModify1;
 	private JFrame mainFrame;
 	private JLabel lblInventory, lblWelcome;
 	
-	private JPanel pnlLeft, pnlRight, pnlTitle;
+	private JPanel pnlLeft, pnlRight, pnlTitle, pnlCenter;
 	private JPanel pnlLeftItemDetail1, pnlLeftItemDetail2;
-	private JButton pnlLeftButtonDetail1, pnlLeftButtonDetail2;
+	private JPanel pnlLeftButtonDetail1, pnlLeftButtonDetail2;
 	
 	public ClientMenu() {
-		
-		mainFrame = new JFrame();
-		lblInventory = new JLabel("Inventory");
-		lblWelcome = new JLabel("Inventory");
-		
-		pnlTitle = new JPanel();
-		pnlLeft = new JPanel();
-		pnlRight = new JPanel();
-		
-		pnlLeftItemDetail1 = new JPanel();
-		pnlLeftItemDetail1 = new JPanel();
-		pnlLeftButtonDetail1 = new JButton();
-		pnlLeftButtonDetail1 = new JButton();
-		
-		
-		mainFrame.setSize(640, 480);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setVisible(true);
-		mainFrame.setLocationRelativeTo(null);
-		
-		JPanel pnlTitleUpper = new JPanel();
-		pnlTitleUpper.add(lblInventory);
-		pnlTitle.add(pnlTitleUpper, "North");
-		
-		JPanel pnlTitleLower = new JPanel();
-		pnlTitleLower.add(lblWelcome);
-		pnlTitle.add(pnlTitleLower, "Center");
-		
-		pnlLeftItemDetail1.add(new JLabel("Name:"));
-		pnlLeftItemDetail1.add(new JLabel("Item Ordered:"));
-		pnlLeftItemDetail1.add(new JLabel("Expected Due:"));
-		pnlLeftItemDetail1.add(new JLabel("Payment Due:"));
-		
-		pnlLeftButtonDetail1.add(btnSetAsCompleted1);
-		pnlLeftButtonDetail1.add(btnModify1);
-		
-		
-		pnlLeftItemDetail2.add(new JLabel("Name:"));
-		pnlLeftItemDetail2.add(new JLabel("Item Ordered:"));
-		pnlLeftItemDetail2.add(new JLabel("Expected Due:"));
-		pnlLeftItemDetail2.add(new JLabel("Payment Due:"));
-		
-		pnlLeftButtonDetail2.add(btnSetAsCompleted2);
-		pnlLeftButtonDetail2.add(btnModify2);
-		
-		pnlLeft.add(new JLabel("Current Clients"));
-		pnlLeft.add(new JPanel());
-		pnlLeft.add(new JPanel());
-		pnlLeft.add(pnlLeftItemDetail1);
-		pnlLeft.add(pnlLeftButtonDetail1);
-		pnlLeft.add(new JPanel());
-		
-		pnlLeft.add(new JPanel());
-		pnlLeft.add(new JPanel());
-		pnlLeft.add(new JPanel());
-		pnlLeft.add(pnlLeftItemDetail2);
-		pnlLeft.add(pnlLeftButtonDetail2);
-		pnlLeft.add(new JPanel());
-		
-		pnlRight.setLayout(new GridLayout(3, 5));
-		pnlRight.add(addClient);
-		pnlRight.add(backButton);
-	}
+		//initialize
+				mainFrame = new JFrame("MyJoeShop > Clients");
+				lblInventory = new JLabel("MyJoeShop");
+				
+				String time = "";
+				Calendar calendar = Calendar.getInstance();
+				time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+				lblWelcome = new JLabel("Welcome back! The current time is " + time);
+				
+				pnlTitle = new JPanel(new BorderLayout());
+				pnlCenter = new JPanel(new BorderLayout());
+				pnlLeft = new JPanel(new GridLayout(4, 3));
+				pnlLeftItemDetail1 = new JPanel(new GridLayout(4, 1));
+				pnlLeftButtonDetail1 = new JPanel(new GridLayout(2, 1));
+				pnlLeftItemDetail2 = new JPanel(new GridLayout(4, 1));
+				pnlLeftButtonDetail2 = new JPanel(new GridLayout(2, 1));
+				pnlRight = new JPanel(new GridLayout(10	, 2));
+				
+				btnSetAsCompleted1 = new JButton("Set as complete");
+				btnModify1 = new JButton("Modify client order");
+				
+				btnSetAsCompleted2 = new JButton("Set as complete");
+				btnModify2 = new JButton("Modify client order");
+				
+				addClient = new JButton("Add Client");
+				backButton = new JButton("Back");
+				
+				mainFrame.setSize(640, 480);
+				mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				mainFrame.setVisible(true);
+				mainFrame.setLocationRelativeTo(null);
+				
+				JPanel pnlTitleUpper = new JPanel();
+				pnlTitleUpper.add(lblInventory);
+				pnlTitle.add(pnlTitleUpper, "North");
+				
+				JPanel pnlTitleLower = new JPanel();
+				pnlTitleLower.add(lblWelcome);
+				pnlTitle.add(pnlTitleLower, "Center");
+				
+				pnlLeftItemDetail1.add(new JLabel("Name:"));
+				pnlLeftItemDetail1.add(new JLabel("Item Ordered:"));
+				pnlLeftItemDetail1.add(new JLabel("Expected Due:"));
+				pnlLeftItemDetail1.add(new JLabel("Payment Due:"));
+				
+				pnlLeftButtonDetail1.add(btnSetAsCompleted1);
+				pnlLeftButtonDetail1.add(btnModify1);
+				
+				
+				pnlLeftItemDetail2.add(new JLabel("Name:"));
+				pnlLeftItemDetail2.add(new JLabel("Item Ordered:"));
+				pnlLeftItemDetail2.add(new JLabel("Expected Due:"));
+				pnlLeftItemDetail2.add(new JLabel("Payment Due:"));
+				
+				pnlLeftButtonDetail2.add(btnSetAsCompleted2);
+				pnlLeftButtonDetail2.add(btnModify2);
+				
+				pnlLeft.add(new JLabel("Current Clients"));
+				pnlLeft.add(new JPanel());
+				pnlLeft.add(new JPanel());
+				pnlLeft.add(pnlLeftItemDetail1);
+				pnlLeft.add(pnlLeftButtonDetail1);
+				pnlLeft.add(new JPanel());
+				
+				pnlLeft.add(new JPanel());
+				pnlLeft.add(new JPanel());
+				pnlLeft.add(new JPanel());
+				pnlLeft.add(pnlLeftItemDetail2);
+				pnlLeft.add(pnlLeftButtonDetail2);
+				pnlLeft.add(new JPanel());
+				
+				
+				JPanel pnlLblActions = new JPanel();
+				pnlLblActions.add(new JLabel("Actions"));
+				pnlRight.add(pnlLblActions);
+				pnlRight.add(new JPanel());
+				
+				pnlRight.add(new JPanel());
+				pnlRight.add(new JPanel());
+				
+				pnlRight.add(addClient);
+				pnlRight.add(new JPanel());
+				
+				pnlRight.add(new JPanel());
+				pnlRight.add(new JPanel());
+				
+				pnlRight.add(backButton);
+				pnlRight.add(new JPanel());
+				
+				pnlRight.add(new JPanel());
+				pnlRight.add(new JPanel());
+				pnlRight.add(new JPanel());
+				pnlRight.add(new JPanel());
+				
+				pnlRight.add(new JPanel());
+				pnlRight.add(new JPanel());
+				
+				
+				pnlCenter.add(pnlLeft,"Center");
+				pnlCenter.add(pnlRight,"East");
+				pnlCenter.add(new JPanel(),"West");
+				pnlCenter.add(new JPanel(),"South");
+				
+				mainFrame.add(pnlTitle,"North");
+				mainFrame.add(pnlCenter,"Center");
+				
+				//ADD ACTION LISTENER
+				backButton.addActionListener(this);
+				addClient.addActionListener(this);
+			}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource().equals(backButton)) {
+					System.out.println("User pressed to menu");
+					new SummaryMenu();
+					mainFrame.dispose();
+				}
+				
+				if(e.getSource().equals(addClient)) {
+				}
+			}
 	
 }
