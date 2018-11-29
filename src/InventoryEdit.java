@@ -27,7 +27,7 @@ public class InventoryEdit implements ActionListener {
 		lblTitle = new JLabel("Add Item to Inventory: ");
 		lblType = new JLabel("Type of Item: ");
 		
-		acceptButton = new JButton("Accept");
+		acceptButton = new JButton("Add");
 		cancelButton = new JButton("Cancel");
 		
 		pnlCenter = new JPanel();

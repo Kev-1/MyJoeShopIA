@@ -135,6 +135,8 @@ public class ClientMenu implements ActionListener {
 				}
 				
 				if(e.getSource().equals(addClient)) {
+					new ClientEdit();
+					mainFrame.dispose();
 				}
 			}
 	
