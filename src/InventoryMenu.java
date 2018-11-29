@@ -158,12 +158,18 @@ public class InventoryMenu implements ActionListener {
 		pnlCenter.add(pnlRight);
 		
 		backButton.addActionListener(this);
+		addButton.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource().equals(backButton)) {
 			new SummaryMenu();
+			mainFrame.dispose();
+		}
+		
+		if(arg0.getSource().equals(addButton)) {
+			new InventoryEdit();
 			mainFrame.dispose();
 		}
 		
