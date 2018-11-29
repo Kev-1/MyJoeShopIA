@@ -143,6 +143,7 @@ public class SummaryMenu implements ActionListener {
 		btnClients.addActionListener(this);
 		btnExit.addActionListener(this);
 		btnInventory.addActionListener(this);
+		btnReload.addActionListener(this);
 	}
 
 	@Override
@@ -157,6 +158,10 @@ public class SummaryMenu implements ActionListener {
 		}
 		if(e.getSource().equals(btnClients)) {
 			new ClientMenu();
+			mainFrame.dispose();
+		}
+		if(e.getSource().equals(btnReload)) {
+			new SummaryMenu();
 			mainFrame.dispose();
 		}
 	}

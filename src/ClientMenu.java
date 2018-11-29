@@ -3,7 +3,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -90,7 +89,6 @@ public class ClientMenu implements ActionListener {
 				pnlLeft.add(pnlLeftButtonDetail2);
 				pnlLeft.add(new JPanel());
 				
-				
 				JPanel pnlLblActions = new JPanel();
 				pnlLblActions.add(new JLabel("Actions"));
 				pnlRight.add(pnlLblActions);
@@ -116,7 +114,6 @@ public class ClientMenu implements ActionListener {
 				pnlRight.add(new JPanel());
 				pnlRight.add(new JPanel());
 				
-				
 				pnlCenter.add(pnlLeft,"Center");
 				pnlCenter.add(pnlRight,"East");
 				pnlCenter.add(new JPanel(),"West");
@@ -133,7 +130,6 @@ public class ClientMenu implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource().equals(backButton)) {
-					System.out.println("User pressed to menu");
 					new SummaryMenu();
 					mainFrame.dispose();
 				}
