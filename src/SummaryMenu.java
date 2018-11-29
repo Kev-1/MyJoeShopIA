@@ -10,23 +10,24 @@ import javax.swing.JPanel;
 
 public class SummaryMenu implements ActionListener {
 	
+	//add attributes on private!
 	private JFrame mainFrame;
 	private JLabel lblTitle,lblWelcome;
-	private JPanel pnlTitle,pnlCenter,pnlLeft,pnlRight;
+	private JPanel pnlTitle, pnlCenter, pnlLeft, pnlRight;
 	
-	private JPanel pnlLeftItemDetail1,pnlLeftButtonDetail1;
-	private JButton btnSetAsComplete1,btnModify1;
+	private JPanel pnlLeftItemDetail1, pnlLeftButtonDetail1;
+	private JButton btnSetAsComplete1, btnModify1;
 	
-	private JPanel pnlLeftItemDetail2,pnlLeftButtonDetail2;
-	private JButton btnSetAsComplete2,btnModify2;
+	private JPanel pnlLeftItemDetail2, pnlLeftButtonDetail2;
+	private JButton btnSetAsComplete2, btnModify2;
 	
-	private JButton btnClients,btnInventory,btnReload,btnExit;
+	private JButton btnClients, btnInventory, btnReload, btnExit;
 	
 	public SummaryMenu() {
 		
 		//initialize
-		mainFrame = new JFrame("Main Window");
-		lblTitle = new JLabel("My Joe Shop");
+		mainFrame = new JFrame("MyJoeShop > Main Menu");
+		lblTitle = new JLabel("MyJoeShop");
 		
 		String time = "";
 		Calendar calendar = Calendar.getInstance();
@@ -151,8 +152,12 @@ public class SummaryMenu implements ActionListener {
 		}
 		
 		if(e.getSource().equals(btnInventory)) {
-		new InventoryMenu();
-		mainFrame.dispose();
+			new InventoryMenu();
+			mainFrame.dispose();
+		}
+		if(e.getSource().equals(btnClients)) {
+			new ClientMenu();
+			mainFrame.dispose();
+		}
 	}
-}
 }
