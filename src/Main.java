@@ -8,48 +8,51 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import javax.swing.JOptionPane;
-
+      
 import database.DBConnection;
 import database.RAF;
 
 public class Main {
 	
-	private static boolean netIsAvailable() {
-	    try {
-	        final URL url = new URL("http://www.google.com");
-	        final URLConnection conn = url.openConnection();
-	        conn.connect();
-	        conn.getInputStream().close();
-	        return true;
-	    } catch (MalformedURLException e) {
-	        throw new RuntimeException(e);
-	    } catch (IOException e) {
-	        return false;
-	    }
-	}
-	
 	public Main() {
-		//new SummaryMenu();
-		
-		if(netIsAvailable())
-		{
-			JOptionPane.showMessageDialog(null, "CONNECTION SUCCESSFULL");
-		}
-		else
-		{
-			int input = JOptionPane.showOptionDialog(null, "NETWORK CONNECTION FAILED", "Status", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
-		
-			switch(input) 
-			{
-			case JOptionPane.OK_OPTION:
-				System.out.println("OKOKOKOKOKOKOK");
-				break;
-			case JOptionPane.CANCEL_OPTION:
-				System.out.println("CANCEL");
-				break;
-			}
-		}
-		
+		new InitialScreen();
+	}
+//	private static boolean netIsAvailable() {
+//	    try {
+//	        final URL url = new URL("http://www.google.com");
+//	        final URLConnection conn = url.openConnection();
+//	        conn.connect();
+//	        conn.getInputStream().close();
+//	        return true;
+//	    } catch (MalformedURLException e) {
+//	        throw new RuntimeException(e);
+//	    } catch (IOException e) {
+//	        return false;
+//	    }
+//	}
+//	
+//	public Main() {
+//		//new SummaryMenu();
+//		
+//		if(netIsAvailable())
+//		{
+//			JOptionPane.showMessageDialog(null, "CONNECTION SUCCESSFULL");
+//		}
+//		else
+//		{
+//			int input = JOptionPane.showOptionDialog(null, "NETWORK CONNECTION FAILED", "Status", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+//		
+//			switch(input) 
+//			{
+//			case JOptionPane.OK_OPTION:
+//				System.out.println("OKOKOKOKOKOKOK");
+//				break;
+//			case JOptionPane.CANCEL_OPTION:
+//				System.out.println("CANCEL");
+//				break;
+//			}
+//		}
+//		
 		//RANDOM ACCESS FILE
 //		RAF raf = new RAF();
 //		raf.writeToFile(RAF.FILE_PATH, "Heyyy tayoo!!\n", 2);
@@ -93,7 +96,7 @@ public class Main {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-	}
+	
 
 	public static void main(String[] args) {
 		new Main();
