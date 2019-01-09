@@ -1,11 +1,15 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import database.DBConnection;
 
 public class InventoryMenu implements ActionListener {
 	private JFrame mainFrame;
@@ -15,7 +19,7 @@ public class InventoryMenu implements ActionListener {
 	private JLabel itemName2, itemRemaining2;
 	private JLabel itemName3, itemRemaining3;
 	private JLabel itemName4, itemRemaining4;
-	
+		
 	private JButton editButton1, deleteButton1;
 	private JButton editButton2, deleteButton2;
 	private JButton editButton3, deleteButton3;
@@ -29,6 +33,8 @@ public class InventoryMenu implements ActionListener {
 	
 	public InventoryMenu() {
 		//Initialization
+		
+		
 		mainFrame = new JFrame();
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,6 +162,20 @@ public class InventoryMenu implements ActionListener {
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
 		pnlCenter.add(pnlRight);
+		
+		DBConnection con = new DBConnection();
+		String query = "SELECT * FROM inventory";
+		
+		ResultSet result = con.executeGet(query);
+		
+		try {
+			while(result.next()) 
+			{
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		backButton.addActionListener(this);
 		addButton.addActionListener(this);

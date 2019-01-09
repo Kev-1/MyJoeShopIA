@@ -4,8 +4,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import database.DBConnection;
 
 public class ClientEdit implements ActionListener {
 	private JFrame mainFrame;
@@ -13,6 +16,7 @@ public class ClientEdit implements ActionListener {
 	private JButton acceptButton, cancelButton;
 	private JPanel pnlCenter, pnlTitle, pnlButtons;
 	private JLabel lblName, lblAddress, lblPhoneNumber, lblTitle, lblItem;
+	private String mode;
 	
 	public ClientEdit() {
 		mainFrame = new JFrame("MyJoeShop > Add Inventory");
@@ -67,12 +71,23 @@ public class ClientEdit implements ActionListener {
 		mainFrame.add(pnlTitle, "North");
 		
 		cancelButton.addActionListener(this);
+		acceptButton.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(acceptButton)) {
-			//file save!
+			mode = new String();
+			DBConnection con = new DBConnection();
+			String sqlName = clientName.getText();
+			String sqlAddress = clientAddress.getText();
+			String sqlPhoneNumber = clientPhoneNumber.getText();
+			String sqlItem = clientItem.getText();
+			String queryInsert = "INSERT INTO client VALUES('"+sqlName+"','"+sqlAddress+"','"+sqlItem+"','"+sqlPhoneNumber+"')";
+			con.executeQuery(queryInsert);
+			JOptionPane.showMessageDialog(null, "Added to database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			new ClientMenu();
+			mainFrame.dispose();
 		}
 		
 		if(e.getSource().equals(cancelButton)) {

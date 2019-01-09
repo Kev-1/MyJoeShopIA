@@ -4,8 +4,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import database.DBConnection;
 
 public class InventoryEdit implements ActionListener {
 	private JFrame mainFrame;
@@ -13,6 +16,7 @@ public class InventoryEdit implements ActionListener {
 	private JButton acceptButton, cancelButton;
 	private JPanel pnlCenter, pnlTitle, pnlButtons;
 	private JLabel lblName, lblQty, lblDescription, lblTitle, lblType;
+	private String mode;
 	
 	public InventoryEdit() {
 		mainFrame = new JFrame("MyJoeShop > Add Inventory");
@@ -35,7 +39,7 @@ public class InventoryEdit implements ActionListener {
 		pnlButtons = new JPanel();
 		
 		mainFrame.setVisible(true);
-		mainFrame.setSize(640, 480);
+		mainFrame.setSize(480, 360);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
 		
@@ -66,13 +70,25 @@ public class InventoryEdit implements ActionListener {
 		mainFrame.add(pnlCenter, "Center");
 		mainFrame.add(pnlTitle, "North");
 		
+		acceptButton.addActionListener(this);
 		cancelButton.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(acceptButton)) {
-			//file save!
+			mode = new String();
+				DBConnection con = new DBConnection();
+				String queryName = itemName.getText();
+				String queryQty = itemQty.getText();
+				String queryType = itemType.getText();
+				String queryDesc = itemDescription.getText();
+				String queryInsert = "INSERT INTO inventory VALUES('"+queryName+"','"+queryQty+"','"+queryType+"','"+queryDesc+"')";
+				con.executeQuery(queryInsert);
+				JOptionPane.showMessageDialog(null, "Added to database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				new InventoryMenu();
+				mainFrame.dispose();
+		
 		}
 		
 		if(e.getSource().equals(cancelButton)) {

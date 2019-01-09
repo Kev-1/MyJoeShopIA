@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 
 //HOW TO CONNECT TO MYSQL DATABASE
 public class DBConnection {
@@ -26,8 +28,11 @@ public class DBConnection {
 			con = DriverManager.getConnection(dbPath,USERNAME,PASSWORD);
 			st = con.createStatement(1004,1008);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			int input = JOptionPane.showOptionDialog(null, "Unable to connect to database!\nTo fix, check your internet connection, or switch to local database by deleting option.txt in data folder and restarting the program.", "Connection Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+			if(input == JOptionPane.OK_OPTION) {
+				System.exit(0);
+			}
 		}
 		
 		
@@ -39,7 +44,6 @@ public class DBConnection {
 		try {
 			st.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -52,7 +56,6 @@ public class DBConnection {
 		try {
 			rs = st.executeQuery(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}

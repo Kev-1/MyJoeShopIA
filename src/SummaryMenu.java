@@ -6,7 +6,11 @@ import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import database.DBConnection;
+import database.RAF;
 
 public class SummaryMenu implements ActionListener {
 	
@@ -22,6 +26,10 @@ public class SummaryMenu implements ActionListener {
 	private JButton btnSetAsComplete2, btnModify2;
 	
 	private JButton btnClients, btnInventory, btnReload, btnExit;
+	
+	private String storageOption;
+	
+	private static final String OPTION_PATH = "data/option.txt";
 	
 	public SummaryMenu() {
 		
@@ -144,6 +152,16 @@ public class SummaryMenu implements ActionListener {
 		btnExit.addActionListener(this);
 		btnInventory.addActionListener(this);
 		btnReload.addActionListener(this);
+		
+		byte[] data = RAF.readFromFile(SummaryMenu.OPTION_PATH, 0, 10);
+		storageOption = new String();
+		if (new String(data).trim().equals("database") == true) {			
+			DBConnection con = new DBConnection();
+			storageOption = "local";
+		} else {
+			storageOption = "database";
+		}
+		
 	}
 
 	@Override

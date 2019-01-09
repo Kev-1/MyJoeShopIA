@@ -32,7 +32,7 @@ public class ClientMenu implements ActionListener {
 				pnlLeft = new JPanel(new GridLayout(4, 3));
 				pnlLeftItemDetail1 = new JPanel(new GridLayout(4, 1));
 				pnlLeftButtonDetail1 = new JPanel(new GridLayout(2, 1));
-				pnlLeftItemDetail2 = new JPanel(new GridLayout(4, 1));
+				pnlLeftItemDetail2 = new JPanel (new GridLayout(4, 1));
 				pnlLeftButtonDetail2 = new JPanel(new GridLayout(2, 1));
 				pnlRight = new JPanel(new GridLayout(10	, 2));
 				
@@ -69,7 +69,7 @@ public class ClientMenu implements ActionListener {
 				
 				pnlLeftItemDetail2.add(new JLabel("Name:"));
 				pnlLeftItemDetail2.add(new JLabel("Item Ordered:"));
-				pnlLeftItemDetail2.add(new JLabel("Expected Due:"));
+				pnlLeftItemDetail2.add(new JLabel("Date Expected:"));
 				pnlLeftItemDetail2.add(new JLabel("Payment Due:"));
 				
 				pnlLeftButtonDetail2.add(btnSetAsCompleted2);
@@ -122,6 +122,9 @@ public class ClientMenu implements ActionListener {
 				mainFrame.add(pnlTitle,"North");
 				mainFrame.add(pnlCenter,"Center");
 				
+				//DB retrieve data!
+				
+		
 				//ADD ACTION LISTENER
 				backButton.addActionListener(this);
 				addClient.addActionListener(this);
