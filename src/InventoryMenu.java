@@ -40,6 +40,7 @@ public class InventoryMenu implements ActionListener {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setTitle("MyJoeShop > Inventory");
 		mainFrame.setSize(640,480);
+		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		
 		pnlCenter = new JPanel();
@@ -162,6 +163,7 @@ public class InventoryMenu implements ActionListener {
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
 		pnlCenter.add(pnlRight);
+		
 		
 		DBConnection con = new DBConnection();
 		String query = "SELECT * FROM inventory";

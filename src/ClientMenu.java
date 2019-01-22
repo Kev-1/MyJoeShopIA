@@ -49,6 +49,7 @@ public class ClientMenu implements ActionListener {
 				mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				mainFrame.setVisible(true);
 				mainFrame.setLocationRelativeTo(null);
+				mainFrame.setResizable(false);
 				
 				JPanel pnlTitleUpper = new JPanel();
 				pnlTitleUpper.add(lblInventory);
