@@ -25,7 +25,7 @@ public class SummaryMenu implements ActionListener {
 	private JPanel pnlLeftItemDetail2, pnlLeftButtonDetail2;
 	private JButton btnSetAsComplete2, btnModify2;
 	
-	private JButton btnClients, btnInventory, btnReload, btnExit;
+	private JButton btnClients, btnInventory, btnReload, btnExit, btnHelp;
 	
 	private String storageOption;
 	
@@ -42,7 +42,7 @@ public class SummaryMenu implements ActionListener {
 		time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
 		lblWelcome = new JLabel("Welcome back! The current time is " + time);
 		
-		pnlTitle = new JPanel(new BorderLayout());
+		pnlTitle = new JPanel(new GridLayout(3, 1));
 		pnlCenter = new JPanel(new BorderLayout());
 		pnlLeft = new JPanel(new GridLayout(4, 3));
 		pnlLeftItemDetail1 = new JPanel(new GridLayout(4, 1));
@@ -58,6 +58,7 @@ public class SummaryMenu implements ActionListener {
 		btnModify2 = new JButton("Modify client order");
 		
 		btnClients = new JButton("Clients");
+		btnHelp = new JButton("Help");
 		
 		btnInventory = new JButton("Inventory");
 		btnReload = new JButton("Reload");
@@ -67,14 +68,15 @@ public class SummaryMenu implements ActionListener {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(true);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setResizable(false);
 		
 		JPanel pnlTitleUpper = new JPanel();
 		pnlTitleUpper.add(lblTitle);
-		pnlTitle.add(pnlTitleUpper, "North");
+		pnlTitle.add(pnlTitleUpper);
 		
 		JPanel pnlTitleLower = new JPanel();
 		pnlTitleLower.add(lblWelcome);
-		pnlTitle.add(pnlTitleLower, "Center");
+		pnlTitle.add(pnlTitleLower);
 		
 		pnlLeftItemDetail1.add(new JLabel("Name:"));
 		pnlLeftItemDetail1.add(new JLabel("Item Ordered:"));
@@ -130,7 +132,7 @@ public class SummaryMenu implements ActionListener {
 		pnlRight.add(new JPanel());
 		pnlRight.add(new JPanel());
 		
-		pnlRight.add(new JPanel());
+		pnlRight.add(btnHelp);
 		pnlRight.add(new JPanel());
 		
 		pnlRight.add(btnReload);
@@ -152,12 +154,13 @@ public class SummaryMenu implements ActionListener {
 		btnExit.addActionListener(this);
 		btnInventory.addActionListener(this);
 		btnReload.addActionListener(this);
+		btnHelp.addActionListener(this);
 		
 		byte[] data = RAF.readFromFile(SummaryMenu.OPTION_PATH, 0, 10);
 		storageOption = new String();
 		if (new String(data).trim().equals("database") == true) {			
 			DBConnection con = new DBConnection();
-			storageOption = "local";
+			storageOption.equals("database");
 		} else {
 			storageOption = "database";
 		}
@@ -181,6 +184,9 @@ public class SummaryMenu implements ActionListener {
 		if(e.getSource().equals(btnReload)) {
 			new SummaryMenu();
 			mainFrame.dispose();
+		}
+		if(e.getSource().equals(btnHelp)) {
+			new HelpMenu();
 		}
 	}
 }

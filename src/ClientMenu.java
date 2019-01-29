@@ -1,12 +1,17 @@
-import java.awt.BorderLayout;
+ 	import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import database.DBConnection;
+import database.RAF;
 
 public class ClientMenu implements ActionListener {
 	private JButton addClient, backButton, btnSetAsCompleted1, btnSetAsCompleted2, btnModify2, btnModify1;
@@ -16,6 +21,8 @@ public class ClientMenu implements ActionListener {
 	private JPanel pnlLeft, pnlRight, pnlTitle, pnlCenter;
 	private JPanel pnlLeftItemDetail1, pnlLeftItemDetail2;
 	private JPanel pnlLeftButtonDetail1, pnlLeftButtonDetail2;
+	
+	private static final String OPTION_PATH = "data/option.txt";
 	
 	public ClientMenu() {
 		//initialize
@@ -49,6 +56,7 @@ public class ClientMenu implements ActionListener {
 				mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				mainFrame.setVisible(true);
 				mainFrame.setLocationRelativeTo(null);
+				mainFrame.setResizable(false);
 				
 				JPanel pnlTitleUpper = new JPanel();
 				pnlTitleUpper.add(lblInventory);
@@ -123,7 +131,20 @@ public class ClientMenu implements ActionListener {
 				mainFrame.add(pnlCenter,"Center");
 				
 				//DB retrieve data!
-				
+				byte[] data = RAF.readFromFile(ClientMenu.OPTION_PATH, 0, 10);
+				String storageOption = new String();
+				if (new String(data).trim().equals("database") == true) {	
+					DBConnection con = new DBConnection();
+					String query = "SELECT * FROM inventory";
+					ResultSet result = con.executeGet(query);
+					try {
+						while(result.next()) {
+							
+						}
+					} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				}
 		
 				//ADD ACTION LISTENER
 				backButton.addActionListener(this);

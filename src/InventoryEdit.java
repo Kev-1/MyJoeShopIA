@@ -42,6 +42,7 @@ public class InventoryEdit implements ActionListener {
 		mainFrame.setSize(480, 360);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setResizable(false);
 		
 		pnlTitle.add(lblTitle);
 		

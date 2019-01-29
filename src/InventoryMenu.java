@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import database.DBConnection;
+import database.RAF;
 
 public class InventoryMenu implements ActionListener {
 	private JFrame mainFrame;
@@ -31,16 +32,16 @@ public class InventoryMenu implements ActionListener {
 	private JPanel item1, item2, item3, item4;
 	private JPanel buttons1, buttons2, buttons3, buttons4;
 	
+	private static final String OPTION_PATH = "data/option.txt";
+	
 	public InventoryMenu() {
-		//Initialization
-		
-		
 		mainFrame = new JFrame();
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setTitle("MyJoeShop > Inventory");
 		mainFrame.setSize(640,480);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setResizable(false);
 		
 		pnlCenter = new JPanel();
 		pnlLeft = new JPanel();
@@ -163,20 +164,20 @@ public class InventoryMenu implements ActionListener {
 		pnlRight.add(new JPanel());
 		pnlCenter.add(pnlRight);
 		
-		DBConnection con = new DBConnection();
-		String query = "SELECT * FROM inventory";
-		
-		ResultSet result = con.executeGet(query);
-		
-		try {
-			while(result.next()) 
-			{
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		byte[] data = RAF.readFromFile(InventoryMenu.OPTION_PATH, 0, 10);
+		String storageOption = new String();
+		if (new String(data).trim().equals("database") == true) {	
+			DBConnection con = new DBConnection();
+			String query = "SELECT * FROM inventory";
+			ResultSet result = con.executeGet(query);
+			try {
+				while(result.next()) {
+					
+				}
+			} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		}
 		backButton.addActionListener(this);
 		addButton.addActionListener(this);
 	}

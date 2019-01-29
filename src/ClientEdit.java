@@ -39,9 +39,10 @@ public class ClientEdit implements ActionListener {
 		pnlButtons = new JPanel();
 		
 		mainFrame.setVisible(true);
-		mainFrame.setSize(640, 480);
+		mainFrame.setSize(480, 360);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setResizable(false);
 		
 		pnlTitle.add(lblTitle);
 		
