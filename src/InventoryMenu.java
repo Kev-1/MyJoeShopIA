@@ -40,6 +40,7 @@ public class InventoryMenu implements ActionListener {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setTitle("MyJoeShop > Inventory");
 		mainFrame.setSize(640,480);
+		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setResizable(false);
 		
@@ -164,6 +165,7 @@ public class InventoryMenu implements ActionListener {
 		pnlRight.add(new JPanel());
 		pnlCenter.add(pnlRight);
 		
+<<<<<<< HEAD
 		byte[] data = RAF.readFromFile(InventoryMenu.OPTION_PATH, 0, 10);
 		String storageOption = new String();
 		if (new String(data).trim().equals("database") == true) {	
@@ -175,6 +177,20 @@ public class InventoryMenu implements ActionListener {
 					
 				}
 			} catch (SQLException e) {
+=======
+		
+		DBConnection con = new DBConnection();
+		String query = "SELECT * FROM inventory";
+		
+		ResultSet result = con.executeGet(query);
+		
+		try {
+			while(result.next()) 
+			{
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+>>>>>>> c4a0b2fc2187a6dfc5c3aacfac050c91f01ba91b
 			e.printStackTrace();
 		}
 		}
