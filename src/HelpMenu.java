@@ -49,6 +49,7 @@ public class HelpMenu {
 		pnlButtons.add(new JPanel());
 		pnlButtons.add(backButton);
 		pnlButtons.add(new JPanel());
+		pnlButtons.add(new JPanel());
 		
 		mainFrame.add(new JPanel(), "West");
 		mainFrame.add(new JPanel(), "East");
