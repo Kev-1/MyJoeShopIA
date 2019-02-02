@@ -171,12 +171,8 @@ public class InventoryMenu implements ActionListener {
 			DBConnection con = new DBConnection();
 			String query = "SELECT * FROM inventory";
 			ResultSet result = con.executeGet(query);
-			try {
-				while(result.next()) {
-					
-				}
-			} catch (SQLException e) {
-			}
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource().equals(backButton)) {
