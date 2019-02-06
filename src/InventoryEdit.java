@@ -18,7 +18,7 @@ public class InventoryEdit implements ActionListener {
 	private JLabel lblName, lblQty, lblDescription, lblTitle, lblType;
 	private String mode;
 	
-	public InventoryEdit() {
+	public InventoryEdit(String editName, String editType, String editQty, String editDesc) {
 		mainFrame = new JFrame("MyJoeShop > Add Inventory");
 		itemDescription = new JTextField();
 		itemName = new JTextField();

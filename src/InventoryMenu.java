@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import database.DBConnection;
@@ -15,7 +16,7 @@ import database.RAF;
 public class InventoryMenu implements ActionListener {
 	private JFrame mainFrame;
 	
-	private JLabel inventoryTitle;
+	private JLabel inventoryTitle, networkStatus;
 	private JLabel itemName1, itemRemaining1, desc1, type1;
 	private JLabel itemName2, itemRemaining2, desc2, type2;
 	private JLabel itemName3, itemRemaining3, desc3, type3;
@@ -35,6 +36,7 @@ public class InventoryMenu implements ActionListener {
 	private static final String OPTION_PATH = "data/option.txt";
 	
 	public InventoryMenu() {
+		
 		mainFrame = new JFrame();
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,10 +51,10 @@ public class InventoryMenu implements ActionListener {
 		pnlNorth = new JPanel();
 		pnlRight = new JPanel();
 		
-		itemName1 = new JLabel("Item1");
-		itemName2 = new JLabel("Item2");
-		itemName3 = new JLabel("Item3");
-		itemName4 = new JLabel("Item4");
+		itemName1 = new JLabel("Item:");
+		itemName2 = new JLabel("Item:");
+		itemName3 = new JLabel("Item:");
+		itemName4 = new JLabel("Item:");
 		
 		itemRemaining1 = new JLabel("Remaining: ");
 		itemRemaining2 = new JLabel("Remaining: ");
@@ -170,20 +172,22 @@ public class InventoryMenu implements ActionListener {
 		String storageOption = new String();
 		if (new String(data).trim().equals("database") == true) {	
 			DBConnection con = new DBConnection();
-			String query = "SELECT * FROM client";
+			String query = "SELECT * FROM inventory";
 			ResultSet result = con.executeGet(query);
 			try {
 				while(result.next()) {
-					(itemName+i).setText("Name: " + result.getString("name"));
-					(itemRemaining + i).setText("Item ordered: " + result.getString("item"));
-					desc1.setText("Address: " + result.getString("address"));
-					type1.setText("Phone Number: " + result.getString("contact"));
+					itemName1.setText(result.getString("name"));
+					itemRemaining1.setText(result.getString("quantity"));
 					i++;
 				}
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		}
+		
+		backButton.addActionListener(this);
+		addButton.addActionListener(this);
+		deleteButton1.addActionListener(this);
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -193,7 +197,16 @@ public class InventoryMenu implements ActionListener {
 		}
 		
 		if(arg0.getSource().equals(addButton)) {
-			new InventoryEdit();
+			new InventoryEdit(null, null, null, null);
+			mainFrame.dispose();
+		}
+		
+		if(arg0.getSource().equals(deleteButton1)) {
+			DBConnection con = new DBConnection();
+			String queryDelete = "DELETE FROM inventory where name = '" + itemName1.getText() +"'";
+			con.executeQuery(queryDelete);
+			JOptionPane.showMessageDialog(null, "Successfully Deleted from database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			new InventoryMenu();
 			mainFrame.dispose();
 		}
 		

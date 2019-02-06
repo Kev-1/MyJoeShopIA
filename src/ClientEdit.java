@@ -18,13 +18,20 @@ public class ClientEdit implements ActionListener {
 	private JLabel lblName, lblAddress, lblPhoneNumber, lblTitle, lblItem;
 	private String mode;
 	
-	public ClientEdit() {
+	public ClientEdit(String editName, String editAddress, String editItem, String editPhone) {
 		mainFrame = new JFrame("MyJoeShop > Add Inventory");
 		clientName = new JTextField();
 		clientAddress = new JTextField();
 		clientPhoneNumber = new JTextField();
 		clientItem = new JTextField();
 		
+		if(editName != null) {
+			clientName.setText(editName);
+			clientAddress.setText(editAddress);
+			clientPhoneNumber.setText(editPhone);
+			clientItem.setText(editItem);
+		}
+	
 		lblName = new JLabel("Name of Client: ");
 		lblAddress = new JLabel("Address of Client: ");
 		lblPhoneNumber = new JLabel("Phone Number of Client:");

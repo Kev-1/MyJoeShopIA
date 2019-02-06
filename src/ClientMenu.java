@@ -8,6 +8,7 @@ import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import database.DBConnection;
@@ -148,10 +149,10 @@ public class ClientMenu implements ActionListener {
 					ResultSet result = con.executeGet(query);
 					try {
 						while(result.next()) {
-							name1.setText("Name: " + result.getString("name"));
-							item1.setText("Item ordered: " + result.getString("item"));
-							address1.setText("Address: " + result.getString("address"));
-							phone1.setText("Phone Number: " + result.getString("contact"));
+							name1.setText(result.getString("name"));
+							item1.setText(result.getString("item"));
+							address1.setText(result.getString("address"));
+							phone1.setText(result.getString("contact"));
 						}
 						while(result.next()) {
 							name2.setText("Name: " + result.getString("name"));
@@ -167,6 +168,8 @@ public class ClientMenu implements ActionListener {
 				//ADD ACTION LISTENER
 				backButton.addActionListener(this);
 				addClient.addActionListener(this);
+				btnSetAsCompleted1.addActionListener(this);
+				btnModify1.addActionListener(this);
 			}
 
 			@Override
@@ -177,8 +180,29 @@ public class ClientMenu implements ActionListener {
 				}
 				
 				if(e.getSource().equals(addClient)) {
-					new ClientEdit();
+					new ClientEdit(null, null, null, null);
 					mainFrame.dispose();
+				}
+				if(e.getSource().equals(btnSetAsCompleted1)) {
+					if(item1.getText().equalsIgnoreCase("Name:") == false) {
+						DBConnection con = new DBConnection();
+						String queryDelete = "DELETE FROM client where name = '" + name1.getText() + "'";
+						System.out.println(queryDelete);
+						con.executeQuery(queryDelete);
+						JOptionPane.showMessageDialog(null, "Successfully Deleted from database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+						new ClientMenu();
+						mainFrame.dispose();
+					}
+				}
+				if(e.getSource().equals(btnModify1)) {
+					if(item1.getText().equalsIgnoreCase("Name:") == false) {
+						String editName = new String(name1.getText());
+						String editItem = new String(item1.getText());
+						String editAddress = new String(address1.getText());
+						String editPhone = new String(phone1.getText());
+						new ClientEdit(editName, editAddress, editItem, editPhone);
+						mainFrame.dispose();
+					}
 				}
 			}
 	
