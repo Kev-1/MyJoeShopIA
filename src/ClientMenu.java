@@ -17,6 +17,8 @@ public class ClientMenu implements ActionListener {
 	private JButton addClient, backButton, btnSetAsCompleted1, btnSetAsCompleted2, btnModify2, btnModify1;
 	private JFrame mainFrame;
 	private JLabel lblInventory, lblWelcome;
+	private JLabel name1, item1, phone1, address1;
+	private JLabel name2, item2, phone2, address2;
 	
 	private JPanel pnlLeft, pnlRight, pnlTitle, pnlCenter;
 	private JPanel pnlLeftItemDetail1, pnlLeftItemDetail2;
@@ -66,19 +68,26 @@ public class ClientMenu implements ActionListener {
 				pnlTitleLower.add(lblWelcome);
 				pnlTitle.add(pnlTitleLower, "Center");
 				
-				pnlLeftItemDetail1.add(new JLabel("Name:"));
-				pnlLeftItemDetail1.add(new JLabel("Item Ordered:"));
-				pnlLeftItemDetail1.add(new JLabel("Expected Due:"));
-				pnlLeftItemDetail1.add(new JLabel("Payment Due:"));
+				name1 = new JLabel("Name:");
+				pnlLeftItemDetail1.add(name1);
+				item1 = new JLabel("Item Ordered:");
+				pnlLeftItemDetail1.add(item1);
+				address1 = new JLabel("Address: ");
+				pnlLeftItemDetail1.add(address1);
+				phone1 = new JLabel("Phone No:");
+				pnlLeftItemDetail1.add(phone1);
 				
 				pnlLeftButtonDetail1.add(btnSetAsCompleted1);
 				pnlLeftButtonDetail1.add(btnModify1);
 				
-				
-				pnlLeftItemDetail2.add(new JLabel("Name:"));
-				pnlLeftItemDetail2.add(new JLabel("Item Ordered:"));
-				pnlLeftItemDetail2.add(new JLabel("Date Expected:"));
-				pnlLeftItemDetail2.add(new JLabel("Payment Due:"));
+				name2 = new JLabel("Name:");
+				pnlLeftItemDetail2.add(name2);
+				item2 = new JLabel("Item Ordered:");
+				pnlLeftItemDetail2.add(item2);
+				address2 = new JLabel("Address: ");
+				pnlLeftItemDetail2.add(address2);
+				phone2 = new JLabel("Phone No:");
+				pnlLeftItemDetail2.add(phone2);
 				
 				pnlLeftButtonDetail2.add(btnSetAsCompleted2);
 				pnlLeftButtonDetail2.add(btnModify2);
@@ -135,11 +144,20 @@ public class ClientMenu implements ActionListener {
 				String storageOption = new String();
 				if (new String(data).trim().equals("database") == true) {	
 					DBConnection con = new DBConnection();
-					String query = "SELECT * FROM inventory";
+					String query = "SELECT * FROM client";
 					ResultSet result = con.executeGet(query);
 					try {
 						while(result.next()) {
-							
+							name1.setText("Name: " + result.getString("name"));
+							item1.setText("Item ordered: " + result.getString("item"));
+							address1.setText("Address: " + result.getString("address"));
+							phone1.setText("Phone Number: " + result.getString("contact"));
+						}
+						while(result.next()) {
+							name2.setText("Name: " + result.getString("name"));
+							item2.setText("Item ordered: " + result.getString("item"));
+							address2.setText("Address: " + result.getString("address"));
+							phone2.setText("Phone Number: " + result.getString("contact"));
 						}
 					} catch (SQLException e) {
 					e.printStackTrace();

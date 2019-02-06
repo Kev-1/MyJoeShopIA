@@ -16,10 +16,10 @@ public class InventoryMenu implements ActionListener {
 	private JFrame mainFrame;
 	
 	private JLabel inventoryTitle;
-	private JLabel itemName1, itemRemaining1;
-	private JLabel itemName2, itemRemaining2;
-	private JLabel itemName3, itemRemaining3;
-	private JLabel itemName4, itemRemaining4;
+	private JLabel itemName1, itemRemaining1, desc1, type1;
+	private JLabel itemName2, itemRemaining2, desc2, type2;
+	private JLabel itemName3, itemRemaining3, desc3, type3;
+	private JLabel itemName4, itemRemaining4, desc4, type4;
 		
 	private JButton editButton1, deleteButton1;
 	private JButton editButton2, deleteButton2;
@@ -165,12 +165,24 @@ public class InventoryMenu implements ActionListener {
 		pnlRight.add(new JPanel());
 		pnlCenter.add(pnlRight);
 		
+		int i = 0;
 		byte[] data = RAF.readFromFile(InventoryMenu.OPTION_PATH, 0, 10);
 		String storageOption = new String();
 		if (new String(data).trim().equals("database") == true) {	
 			DBConnection con = new DBConnection();
-			String query = "SELECT * FROM inventory";
+			String query = "SELECT * FROM client";
 			ResultSet result = con.executeGet(query);
+			try {
+				while(result.next()) {
+					(itemName+i).setText("Name: " + result.getString("name"));
+					(itemRemaining + i).setText("Item ordered: " + result.getString("item"));
+					desc1.setText("Address: " + result.getString("address"));
+					type1.setText("Phone Number: " + result.getString("contact"));
+					i++;
+				}
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		}
 	}
 	@Override

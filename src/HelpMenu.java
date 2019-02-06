@@ -1,11 +1,13 @@
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class HelpMenu {
+public class HelpMenu implements ActionListener {
 	private JFrame mainFrame;
 	private JLabel lblTitle1, lblTitle2, lblTitle3, lblTitle4;
 	private JLabel lblDesc1, lblDesc2, lblDesc3, lblDesc4, lblTitle;
@@ -37,25 +39,47 @@ public class HelpMenu {
 		lblTitle = new JLabel("Help and Support");
 		
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(10,1));
+		mainPanel.setLayout(new GridLayout(12,1));
+		mainPanel.add(lblTitle1);
+		mainPanel.add(lblDesc1);
+		mainPanel.add(new JPanel());
+		mainPanel.add(lblTitle2);
+		mainPanel.add(lblDesc2);
+		mainPanel.add(new JPanel());
+		mainPanel.add(lblTitle3);
+		mainPanel.add(lblDesc3);
+		mainPanel.add(new JPanel());
+		mainPanel.add(lblTitle4);
+		mainPanel.add(lblDesc4);
+		
 		
 		pnlTitle = new JPanel();
+		pnlTitle.add(lblTitle);
 		pnlButtons = new JPanel();
 		
 		pnlTitle.add(lblTitle);
 		backButton = new JButton("Back");
 		
-		pnlButtons.setLayout(new GridLayout(1,4));
+		pnlButtons.setLayout(new GridLayout(1,3));
 		pnlButtons.add(new JPanel());
 		pnlButtons.add(backButton);
 		pnlButtons.add(new JPanel());
-		pnlButtons.add(new JPanel());
-		
+		mainPanel.add(pnlButtons);
 		mainFrame.add(new JPanel(), "West");
 		mainFrame.add(new JPanel(), "East");
 		mainFrame.add(new JPanel(), "South");
+		mainFrame.add(pnlTitle, "North");
+		mainFrame.add(mainPanel, "Center");
 		
+		backButton.addActionListener(this);
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(backButton)) {
+			mainFrame.dispose();
+		}
 		
 	}
 }
