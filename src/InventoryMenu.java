@@ -16,7 +16,7 @@ import database.RAF;
 public class InventoryMenu implements ActionListener {
 	private JFrame mainFrame;
 	
-	private JLabel inventoryTitle, networkStatus;
+	private JLabel inventoryTitle;
 	private JLabel itemName1, itemRemaining1, desc1, type1;
 	private JLabel itemName2, itemRemaining2, desc2, type2;
 	private JLabel itemName3, itemRemaining3, desc3, type3;
@@ -60,6 +60,16 @@ public class InventoryMenu implements ActionListener {
 		itemRemaining2 = new JLabel("Remaining: ");
 		itemRemaining3 = new JLabel("Remaining: ");
 		itemRemaining4 = new JLabel("Remaining: ");
+		
+		desc1 = new JLabel();
+		desc2 = new JLabel();
+		desc3 = new JLabel();
+		desc4 = new JLabel();
+		
+		type1 = new JLabel();
+		type2 = new JLabel();
+		type3 = new JLabel();
+		type4 = new JLabel();
 		
 		inventoryTitle = new JLabel("Inventory");
 		
@@ -178,6 +188,8 @@ public class InventoryMenu implements ActionListener {
 				while(result.next()) {
 					itemName1.setText(result.getString("name"));
 					itemRemaining1.setText(result.getString("quantity"));
+					desc1.setText(result.getString("description"));
+					type1.setText(result.getString("type"));
 					i++;
 				}
 			} catch (SQLException e) {
@@ -188,6 +200,7 @@ public class InventoryMenu implements ActionListener {
 		backButton.addActionListener(this);
 		addButton.addActionListener(this);
 		deleteButton1.addActionListener(this);
+		editButton1.addActionListener(this);
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -202,13 +215,28 @@ public class InventoryMenu implements ActionListener {
 		}
 		
 		if(arg0.getSource().equals(deleteButton1)) {
-			DBConnection con = new DBConnection();
-			String queryDelete = "DELETE FROM inventory where name = '" + itemName1.getText() +"'";
-			con.executeQuery(queryDelete);
-			JOptionPane.showMessageDialog(null, "Successfully Deleted from database!", "Success", JOptionPane.INFORMATION_MESSAGE);
-			new InventoryMenu();
-			mainFrame.dispose();
+			if(itemName1.getText().equals("Item:")) {
+				JOptionPane.showMessageDialog(null, "The item is blank.", "Failed", JOptionPane.ERROR_MESSAGE);
+			} else {
+				DBConnection con = new DBConnection();
+				String queryDelete = "DELETE FROM inventory where name = '" + itemName1.getText() +"'";
+				con.executeQuery(queryDelete);
+				JOptionPane.showMessageDialog(null, "Successfully Deleted from database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				new InventoryMenu();
+				mainFrame.dispose();
+			}
 		}
-		
+		if(arg0.getSource().equals(editButton1)) {
+			if(itemName1.getText().equals("Item:")) {
+				JOptionPane.showMessageDialog(null, "The item is blank.", "Failed", JOptionPane.ERROR_MESSAGE);
+			} else {
+			String editName = new String(itemName1.getText());
+			String editQty = new String(itemRemaining1.getText());
+			String editDesc = new String(desc1.getText());
+			String editType = new String(type1.getText());
+			new InventoryEdit(editName, editType, editQty, editDesc);
+			mainFrame.dispose();
+			}
+		}
 	}
 }

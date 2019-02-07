@@ -25,6 +25,13 @@ public class InventoryEdit implements ActionListener {
 		itemQty = new JTextField();
 		itemType = new JTextField();
 		
+		if(editName != null) {
+			itemName.setText(editName);
+			itemDescription.setText(editDesc);
+			itemType.setText(editType);
+			itemQty.setText(editQty);
+		}
+		
 		lblName = new JLabel("Name of Item: ");
 		lblQty = new JLabel("No of items: ");
 		lblDescription = new JLabel("Description: ");
@@ -78,7 +85,10 @@ public class InventoryEdit implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(acceptButton)) {
-			mode = new String();
+			if(itemName.getText().equals("") || itemDescription.getText().equals("") || itemQty.getText().equals("") || itemType.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "One of the fields is empty.", "Failed", JOptionPane.ERROR_MESSAGE);
+			} else {
+				mode = new String();
 				DBConnection con = new DBConnection();
 				String queryName = itemName.getText();
 				String queryQty = itemQty.getText();
@@ -89,7 +99,7 @@ public class InventoryEdit implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Added to database!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				new InventoryMenu();
 				mainFrame.dispose();
-		
+			}
 		}
 		
 		if(e.getSource().equals(cancelButton)) {

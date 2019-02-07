@@ -147,18 +147,21 @@ public class ClientMenu implements ActionListener {
 					DBConnection con = new DBConnection();
 					String query = "SELECT * FROM client";
 					ResultSet result = con.executeGet(query);
+					int i = 0;
 					try {
 						while(result.next()) {
-							name1.setText(result.getString("name"));
-							item1.setText(result.getString("item"));
-							address1.setText(result.getString("address"));
-							phone1.setText(result.getString("contact"));
-						}
-						while(result.next()) {
-							name2.setText("Name: " + result.getString("name"));
-							item2.setText("Item ordered: " + result.getString("item"));
-							address2.setText("Address: " + result.getString("address"));
-							phone2.setText("Phone Number: " + result.getString("contact"));
+							if(i == 0) {
+								name1.setText(result.getString("name"));
+								item1.setText(result.getString("item"));
+								address1.setText(result.getString("address"));
+								phone1.setText(result.getString("contact"));
+							} else if(i == 1) {
+								name2.setText(result.getString("name"));
+								item2.setText(result.getString("item"));
+								address2.setText(result.getString("address"));
+								phone2.setText(result.getString("contact"));
+							}
+							i++;
 						}
 					} catch (SQLException e) {
 					e.printStackTrace();
@@ -169,6 +172,8 @@ public class ClientMenu implements ActionListener {
 				backButton.addActionListener(this);
 				addClient.addActionListener(this);
 				btnSetAsCompleted1.addActionListener(this);
+				btnModify1.addActionListener(this);
+				btnSetAsCompleted2.addActionListener(this);
 				btnModify1.addActionListener(this);
 			}
 
@@ -200,6 +205,27 @@ public class ClientMenu implements ActionListener {
 						String editItem = new String(item1.getText());
 						String editAddress = new String(address1.getText());
 						String editPhone = new String(phone1.getText());
+						new ClientEdit(editName, editAddress, editItem, editPhone);
+						mainFrame.dispose();
+					}
+				}
+				if(e.getSource().equals(btnSetAsCompleted2)) {
+					if(item1.getText().equalsIgnoreCase("Name:") == false) {
+						DBConnection con = new DBConnection();
+						String queryDelete = "DELETE FROM client where name = '" + name2.getText() + "'";
+						System.out.println(queryDelete);
+						con.executeQuery(queryDelete);
+						JOptionPane.showMessageDialog(null, "Successfully Deleted from database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+						new ClientMenu();
+						mainFrame.dispose();
+					}
+				}
+				if(e.getSource().equals(btnModify2)) {
+					if(item1.getText().equalsIgnoreCase("Name:") == false) {
+						String editName = new String(name2.getText());
+						String editItem = new String(item2.getText());
+						String editAddress = new String(address2.getText());
+						String editPhone = new String(phone2.getText());
 						new ClientEdit(editName, editAddress, editItem, editPhone);
 						mainFrame.dispose();
 					}

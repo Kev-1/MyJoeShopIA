@@ -17,8 +17,8 @@ public class ClientEdit implements ActionListener {
 	private JPanel pnlCenter, pnlTitle, pnlButtons;
 	private JLabel lblName, lblAddress, lblPhoneNumber, lblTitle, lblItem;
 	private String mode;
-	
 	public ClientEdit(String editName, String editAddress, String editItem, String editPhone) {
+		
 		mainFrame = new JFrame("MyJoeShop > Add Inventory");
 		clientName = new JTextField();
 		clientAddress = new JTextField();
@@ -85,17 +85,21 @@ public class ClientEdit implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(acceptButton)) {
-			mode = new String();
-			DBConnection con = new DBConnection();
-			String sqlName = clientName.getText();
-			String sqlAddress = clientAddress.getText();
-			String sqlPhoneNumber = clientPhoneNumber.getText();
-			String sqlItem = clientItem.getText();
-			String queryInsert = "INSERT INTO client VALUES('"+sqlName+"','"+sqlAddress+"','"+sqlItem+"','"+sqlPhoneNumber+"')";
-			con.executeQuery(queryInsert);
-			JOptionPane.showMessageDialog(null, "Added to database!", "Success", JOptionPane.INFORMATION_MESSAGE);
-			new ClientMenu();
-			mainFrame.dispose();
+			if(clientName.getText().equals("") || clientAddress.getText().equals("") || clientPhoneNumber.getText().equals("") || clientItem.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "One of the fields is empty.", "Failed", JOptionPane.ERROR_MESSAGE);
+			} else {
+				mode = new String();
+				DBConnection con = new DBConnection();
+				String sqlName = clientName.getText();
+				String sqlAddress = clientAddress.getText();
+				String sqlPhoneNumber = clientPhoneNumber.getText();
+				String sqlItem = clientItem.getText();
+				String queryInsert = "INSERT INTO client VALUES('"+sqlName+"','"+sqlAddress+"','"+sqlItem+"','"+sqlPhoneNumber+"')";
+				con.executeQuery(queryInsert);
+				JOptionPane.showMessageDialog(null, "Added to database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				new ClientMenu();
+				mainFrame.dispose();
+			}
 		}
 		
 		if(e.getSource().equals(cancelButton)) {
